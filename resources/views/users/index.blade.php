@@ -3,6 +3,7 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
