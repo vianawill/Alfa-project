@@ -53,7 +53,7 @@ body{
     width: 100%;
     border-collapse: separate; /* Define bordas separadas */
     border-spacing: 0; /* Remove o espaço entre as células */
-    border: 2px solid #ddd; /* Define a borda externa */
+    border: 1px solid #ddd; /* Define a borda externa */
     border-radius: 15px; /* Aplica o arredondamento */
     overflow: hidden; /* Garante que o arredondamento apareça corretamente */
 }
@@ -63,7 +63,7 @@ body{
     padding: 12px;
     text-align: center;
     border-top: none; /* Remove a borda superior */
-    border-bottom: 5px solid #1b2e46 !important; /* Define a cor da borda horizontal entre as linhas */
+    border-bottom: 7px solid #1b2e46 !important; /* Define a cor da borda horizontal entre as linhas */
     color: #fff;
 }
 

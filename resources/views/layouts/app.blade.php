@@ -72,7 +72,7 @@
                 </div>
                 @endauth
             </div>
-        </nav>
+        </div>
 
         <!-- Conteúdo Principal -->
         <main class="content flex-grow-1 py-4">
