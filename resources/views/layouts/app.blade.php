@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,119 +10,91 @@
 
     <title>{{ config('app.name', 'RDO') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Link para o Bootstrap CSS -->
+    <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="d-flex flex-column">
+        <!-- Barra de navegação superior -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
+                <!-- Logo -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <h1>{{ config('app.name', 'RDO') }}</h1>
                 </a>
 
-                <!-- só aparece se logado -->
+                <!-- Perfil do Usuário no Canto Superior Direito -->
                 @auth
-                   <!-- <div class="container text-center"> -->
-                        <div class="button-container">
-                            <a href="{{ route('users.index') }}" 
-                                class="btn btn-primary">Usuários
-                            </a>
-                            <a href="{{ route('rdos.index') }}" 
-                                class="btn btn-primary">RDOs
-                            </a>
-                            <a href="{{ route('obras.index') }}" 
-                                class="btn btn-primary">Obras
-                            </a>
-                            <a href="{{ route('equipamentos.index') }}" 
-                                class="btn btn-primary">Equipamentos
-                            </a>
-                            <a href="{{ route('mao_obras.index') }}" 
-                                class="btn btn-primary">Mão de obra
-                            </a>
-                        </div>
-                    <!-- </div> -->
-
-                    <button class="navbar-toggler" 
-                        type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#navbarSupportedContent" 
-                        aria-controls="navbarSupportedContent" 
-                        aria-expanded="false" 
-                        aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
+                <div class="profile-container">
+                    <button class="btn btn-secondary dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
                     </button>
-                @endauth
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto"></ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Cadastrar') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
+                @endauth
             </div>
         </nav>
 
-        <main class="py-4">
+        <!-- Sidebar -->
+        <nav class="sidebar bg-light shadow-sm">
+            <button class="toggle-button" id="toggleSidebar">
+                &times;
+            </button>
+
+            <div class="container py-4">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <h1>{{ config('app.name', 'RDO') }}</h1>
+                </a>
+
+                <!-- Botões da Sidebar -->
+                @auth
+                <div class="button-container d-flex flex-column">
+                    <a href="{{ route('users.index') }}" class="btn btn-primary mb-2">Usuários</a>
+                    <a href="{{ route('rdos.index') }}" class="btn btn-primary mb-2">RDOs</a>
+                    <a href="{{ route('obras.index') }}" class="btn btn-primary mb-2">Obras</a>
+                    <a href="{{ route('equipamentos.index') }}" class="btn btn-primary mb-2">Equipamentos</a>
+                    <a href="{{ route('mao_obras.index') }}" class="btn btn-primary mb-2">Mão de Obra</a>
+                </div>
+                @endauth
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="content flex-grow-1 py-4">
             @yield('content')
         </main>
     </div>
-    <!-- Scripts do Bootstrap -->
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-
-        <!-- deu muitos problemas, tentar depois
-        <script>
-            $(document).ready(function() 
-                {
-                    $('input[name="cpf"]').mask('000.000.000-00', {reverse: true}); 
-                });
-        </script> -->
+    <!-- Script para funcionalidade da Sidebar -->
+    <script>
+        // Alternar visibilidade da sidebar
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        });
+    </script>
 </body>
+
 </html>

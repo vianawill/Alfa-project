@@ -1,0 +1,130 @@
+/* Sidebar fixa ao lado esquerdo */
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Botão para colapsar a sidebar */
+.toggle-button {
+    position: fixed;
+    /* Fixa o botão na tela */
+    top: 10px;
+    left: 260px;
+    /* Posição ao lado da sidebar */
+    z-index: 1100;
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: left 0.3s ease-in-out;
+}
+
+/* Ajuste do conteúdo principal */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Sidebar escondida */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* Conteúdo também colapsa */
+.content.collapsed {
+    margin-left: 0;
+}
+
+/* Botão ajustado quando sidebar está colapsada */
+.sidebar.collapsed~.toggle-button {
+    left: 10px;
+    /* Move o botão para o lado esquerdo */
+}
+
+/* Botões organizados verticalmente */
+.button-container .btn {
+    text-align: left;
+    width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .toggle-button {
+        left: 10px;
+        /* Posição fixa no mobile */
+    }
+}
+
+/* Centralizar o perfil no canto superior direito */
+.profile-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centraliza o conteúdo do perfil */
+    z-index: 1100;
+}
+
+/* Botão do perfil */
+.profile-container .btn {
+    background-color: rgba(64, 105, 216, 0.3);
+    color:#4069d8;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover do botão do perfil */
+.profile-container .btn:hover {
+    background-color: #4069d8;
+}
+
+/* Dropdown do perfil */
+.profile-container .dropdown-menu {
+    min-width: 150px;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajuste para a navbar (perfil alinhado à direita) */
+.navbar .ml-auto {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Ajuste do dropdown do perfil */
+.dropdown-menu-right {
+    right: 0 !important;
+    left: auto !important;
+}

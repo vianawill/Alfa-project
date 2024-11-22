@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
+    min-height: 100vh;
+    /* Garante que ocupa 100% da altura da tela */
+    margin: 0;
+    /* Remove margens padrão */
+    background-color: #f0f0f0;
+    /* Cor de fundo da tela (opcional) */
+}
+
+.entre {
+    border: 2px solid #007bff;
+    /* Borda azul */
+    border-radius: 10px;
+    /* Arredondamento da borda */
+    padding: 20px;
+    /* Espaço interno */
+    text-align: center;
+    /* Centraliza o conteúdo do texto */
+    background-color: #f8f9fa;
+    /* Fundo claro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombras para destaque (opcional) */
+}
